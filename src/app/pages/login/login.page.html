@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Login</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <div class="container">
+        <form (ngSubmit)="login()">
+            <ion-item *ngFor="let input of userForm.Model; let i = index">
+                <ion-label position="floating">{{ input.DisplayName }}</ion-label>
+                <ion-input type="{{userForm.Model.Type}}" class="form-control" id="{{input.DisplayName}}"
+                           [(ngModel)]="input.Value" name="{{input.DisplayName}}"></ion-input>
+                <ion-text [hidden]="!input.DisplayInvalidMessage" color="danger" style="font-size: small">
+                    {{ input.InvalidMessage}}
+                </ion-text>
+                <ion-text [hidden]="!input.DisplayRequiredMessage" color="danger" style="font-size: small">
+                    {{ input.RequiredMessage}}
+                </ion-text>
+            </ion-item>
+            <br />
+            <ion-button expand="full" type="submit" class="btn btn-success">{{userForm.ButtonMessage}}</ion-button>
+        </form>
+    </div>
+</ion-content>

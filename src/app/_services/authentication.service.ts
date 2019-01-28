@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-//import { HttpHeaders } from '@angular/common/http/src/headers';
+import { Url } from '../_constants/url';
+import { Local } from 'protractor/built/driverProviders';
 
 @Injectable()
 export class AuthenticationService {
@@ -15,12 +16,16 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string): Observable<object> {
-        const url = 'http://localhost:8000/get-token/';
-        console.log('We are loging in');
-        return this.http.post(url, { username: username, password: password });
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/x-www-form-urlencoded'
+            })
+        };
+
+        return this.http.post(Url.token, `grant_type=password&username=${username}&password=${password}`, httpOptions)
     }
 
-    authenticated(): boolean {
+    isAuthenticated(): boolean {
         var authenti : boolean = (localStorage.getItem("token") != undefined);
         console.log("Authenticated : " + authenti)
         return authenti;
@@ -30,5 +35,9 @@ export class AuthenticationService {
         // clear token remove user from local storage to log user out
         localStorage.removeItem('token');
         return true;
+    }
+
+    getToken(): string {
+        return localStorage.getItem("token");
     }
 }

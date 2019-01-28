@@ -10,17 +10,18 @@ const routes: Routes = [
     },
     {
         path: 'home',
-        loadChildren: './home/home.module#HomePageModule',
+        loadChildren: './pages/home/home.module#HomePageModule',
         canActivate: [AuthGuard]
     },
     {
-        path: 'list',
-        loadChildren: './list/list.module#ListPageModule'
+        path: 'login',
+        loadChildren: './pages/login/login.module#LoginPageModule'
     },
     {
-        path: 'login',
-        loadChildren: './login/login.module#LoginPageModule'
+        path: 'sign-in',
+        loadChildren: './pages/sign-in/sign-in.module#SignInPageModule'
     }
+
 ];
 
 @NgModule({

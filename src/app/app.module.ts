@@ -8,9 +8,10 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AuthenticationService } from './_services';
+import { AuthenticationService, HttpService } from './_services';
 import { AuthGuard } from './_guards';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [AppComponent],
@@ -18,7 +19,9 @@ import { HttpClientModule } from '@angular/common/http';
     imports: [
         BrowserModule,
         IonicModule.forRoot(),
-        AppRoutingModule
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule
     ],
     providers: [
         StatusBar,
@@ -26,7 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         AuthGuard,
         AuthenticationService,
-        HttpClientModule
+        HttpService
     ],
     bootstrap: [AppComponent]
 })
